@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Variables demo</title>
+  <style>
+    :root {
+        --red-value: 0;
+        --green-value: 0;
+        --blue-value: 0;
+    }
+
+    .result {
+        width: 50px;
+        height: 50px;
+        background-color: rgb(var(--red-value), var(--green-value), var(--blue-value));
+    }
+  </style>
+</head>
+<body>
+<h1>
+  CSS Variables demo
+</h1>
+<div id="bubble-wrapper">
+  <label for="red">Red</label>
+  <input type="range" min="0" max="255" step="1" value="0" id="red">
+  <br>
+  <label for="green">Green</label>
+  <input type="range" min="0" max="255" step="1" value="0" id="green">
+  <br>
+  <label for="blue">Blue</label>
+  <input type="range" min="0" max="255" step="1" value="0" id="blue">
+</div>
+<br>
+Result:
+<div class="result"></div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#bubble-wrapper').addEventListener('input', e => {
+      if (!['red', 'green', 'blue'].includes(e.target.id)) {
+        return;
+      }
+      document
+        .querySelector('body')
+        .style
+        .setProperty(`--${e.target.id}-value`, e.target.value);
+    });
+  });
+</script>
+</body>
+</html>
